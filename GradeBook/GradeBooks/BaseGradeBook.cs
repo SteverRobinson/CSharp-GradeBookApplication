@@ -12,13 +12,15 @@ namespace GradeBook.GradeBooks
     public abstract class BaseGradeBook
     {
         public GradeBookType Type { get; set; }
+        public bool IsWeighted { get; set; }
 
         public string Name { get; set; }
         public List<Student> Students { get; set; }
 
-        public BaseGradeBook(string name)
+        public BaseGradeBook(string name, bool isWeighted)
         {
             Name = name;
+            IsWeighted = IsWeighted;
             Students = new List<Student>();
         }
 
@@ -111,17 +113,17 @@ namespace GradeBook.GradeBooks
             switch (letterGrade)
             {
                 case 'A':
-                    return 4;
+                    return 4 + (IsWeighted ? 1 : 0);
                 case 'B':
-                    return 3;
+                    return 3 + (IsWeighted ? 1 : 0); ;
                 case 'C':
-                    return 2;
+                    return 2 + (IsWeighted ? 1 : 0); ;
                 case 'D':
-                    return 1;
+                    return 1 + (IsWeighted ? 1 : 0); ;
                 case 'F':
-                    return 0;
+                    return 0 + (IsWeighted ? 1 : 0); ;
             }
-            return 0;
+            return 0 + (IsWeighted ? 1 : 0); ;
         }
 
         public virtual void CalculateStatistics()
